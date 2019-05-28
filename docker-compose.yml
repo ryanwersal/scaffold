@@ -4,7 +4,7 @@ services:
   web:
     image: web
     build: ./web
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000 --nostatic
     volumes:
       - ./web:/code
     ports:

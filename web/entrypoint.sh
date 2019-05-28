@@ -7,12 +7,17 @@ if [ "$DATABASE" = "postgres" ]; then
         sleep 0.25
     done
 
-    echo "PostgreSQL started"
+    echo "PostgreSQL started."
 fi
 
-if [ "$MIGRATE_DB_ON_STARTUP" = "True" ]; then
+if [ "$DEBUG" = "1" ]; then
     echo "Running database migrations..."
     python manage.py migrate
+    echo "Finished running database migrations."
 fi
+
+echo "Collecting static files..."
+python manage.py collectstatic
+echo "Finished collecting static files."
 
 exec "$@"

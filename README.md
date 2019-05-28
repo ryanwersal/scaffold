@@ -14,11 +14,12 @@ Just a basic project scaffold for Python/Django/Docker/AWS/etc.
 
 ## Configuring your editor to point to the virtualenv Python
 
-Run `pipenv --venv` to get the path to the virtualenv Python,
+In the ./web directory run `pipenv --venv` to get the path to the virtualenv Python,
 then configure your editor to point to that path as its Python.
 In Visual Studio Code this can be done in .vscode/settings.json
 by setting the python.pythonPath variable.
 
 ## Adding new Python dependencies
 
-`pipenv install foo` and then `docker-compose up --build -d`
+From the ./web directory do
+`pipenv install foo` and then from the root directory do `docker-compose up --build -d`

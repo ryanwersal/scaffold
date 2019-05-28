@@ -22,7 +22,7 @@ RUN apt-get update \
 RUN pip install --upgrade pip
 RUN pip install pipenv
 COPY Pipfile Pipfile.lock /code/
-RUN pipenv install --system
+RUN pipenv install --system --deploy
 
 # Copy project code.
 COPY . /code/
