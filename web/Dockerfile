@@ -1,6 +1,6 @@
 # Psycopg2 must be built from source on Alpine and it doesn't
 # seem to work with pipenv and I don't want to screw with apk right now.
-FROM python:3.7-slim
+FROM python:3.7-slim-stretch
 
 LABEL Name=web
 

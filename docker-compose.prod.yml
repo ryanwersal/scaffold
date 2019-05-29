@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   web:
-    command: gunicorn app.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn app.wsgi:application
     env_file: ./envs/web.prod.env
     expose:
       - 8000
