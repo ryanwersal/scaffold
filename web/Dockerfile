@@ -24,6 +24,13 @@ RUN pip install pipenv
 COPY Pipfile Pipfile.lock /code/
 RUN pipenv install --system --deploy
 
+# Run as non-root.
+RUN groupadd -g 999 appuser && \
+    useradd -r -u 999 -g appuser appuser && \
+    mkdir /staticfiles && \
+    chown appuser:appuser /staticfiles
+USER appuser
+
 # Copy project code.
 COPY . /code/
 
