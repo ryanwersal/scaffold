@@ -1,18 +1,18 @@
 #!/bin/sh
 
-if [ "$DATABASE" = "postgres" ]; then
+if [ "$APP_DATABASE" = "postgres" ]; then
     echo "Waiting for PostgreSQL..."
 
-    while ! nc -z $SQL_HOST $SQL_PORT; do
+    while ! nc -z $APP_SQL_HOST $APP_SQL_PORT; do
         sleep 0.25
     done
 
     echo "PostgreSQL started."
 fi
 
-if [ "$DEBUG" = "1" ]; then
+if [ "$APP_RUN_MIGRATIONS" = "true" ]; then
     echo "Running database migrations..."
-    python manage.py migrate
+    python manage.py migrate --no-input
     echo "Finished running database migrations."
 fi
 
