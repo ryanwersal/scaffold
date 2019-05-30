@@ -117,8 +117,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# NOTE: This is probably dumb. It's to avoid having all the processed static
-# files end up in the project root. Need to reevaluate this later.
-STATIC_ROOT = '/staticfiles/' #os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

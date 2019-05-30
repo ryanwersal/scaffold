@@ -26,9 +26,7 @@ RUN pipenv install --system --deploy
 
 # Run as non-root.
 RUN groupadd -g 999 appuser && \
-    useradd -r -u 999 -g appuser appuser && \
-    mkdir /staticfiles && \
-    chown appuser:appuser /staticfiles
+    useradd -r -u 999 -g appuser appuser
 USER appuser
 
 # Copy project code.
