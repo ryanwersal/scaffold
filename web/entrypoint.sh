@@ -17,7 +17,7 @@ if [ "$DEBUG" = "1" ]; then
 fi
 
 echo "Collecting static files..."
-python manage.py collectstatic
+python manage.py collectstatic --no-input
 echo "Finished collecting static files."
 
 exec "$@"
