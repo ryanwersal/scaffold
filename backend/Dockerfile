@@ -1,8 +1,9 @@
+
 # Psycopg2 must be built from source on Alpine and it doesn't
 # seem to work with pipenv and I don't want to screw with apk right now.
 FROM python:3.7-slim-stretch
 
-LABEL Name=web
+LABEL Name=backend
 
 # Don't write .pyc files.
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -11,7 +12,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Set the work directory.
-WORKDIR /code
+WORKDIR /app
 
 # Install system dependencies.
 RUN apt-get update \
@@ -21,7 +22,7 @@ RUN apt-get update \
 # Install project dependencies.
 RUN pip install --upgrade pip
 RUN pip install pipenv
-COPY Pipfile Pipfile.lock /code/
+COPY Pipfile Pipfile.lock /app/
 RUN pipenv install --system --deploy
 
 # Run as non-root.
@@ -30,7 +31,7 @@ RUN groupadd -g 999 appuser && \
 USER appuser
 
 # Copy project code.
-COPY . /code/
+COPY . /app/
 
 # Run initialization script.
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./scripts/entrypoint.sh"]

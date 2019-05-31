@@ -1,16 +1,16 @@
 version: '3.7'
 
 services:
-  web:
-    command: gunicorn app.wsgi:application
-    env_file: ./envs/web.prod.env
+  backend:
+    command: gunicorn config.wsgi
+    env_file: ./envs/prod.env
     expose:
       - 8000
-  db:
-    env_file: ./envs/db.prod.env
+  postgres:
+    env_file: ./envs/prod.env
   nginx:
     build: ./nginx
     ports:
       - 8000:80
     depends_on:
-      - web
+      - backend

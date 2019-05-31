@@ -11,16 +11,19 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import environ
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Load environment variables.
+env = environ.Env()
 
+# The ROOT_DIR should be /backend
+ROOT_DIR = environ.Path(__file__) - 2
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('APP_SECRET_KEY')
+SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
 
 # Application definition
@@ -45,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'app.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -63,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'app.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
@@ -71,12 +74,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('APP_SQL_ENGINE'),
-        'NAME': os.environ.get('APP_SQL_DATABASE'),
-        'USER': os.environ.get('APP_SQL_USER'),
-        'PASSWORD': os.environ.get('APP_SQL_PASSWORD'),
-        'HOST': os.environ.get('APP_SQL_HOST'),
-        'PORT': os.environ.get('APP_SQL_PORT'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env.str('POSTGRES_DB'),
+        'USER': env.str('POSTGRES_USER'),
+        'PASSWORD': env.str('POSTGRES_PASSWORD'),
+        'HOST': env.str('POSTGRES_HOST'),
+        'PORT': env.int('POSTGRES_PORT'),
     }
 }
 
@@ -117,6 +120,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = str(ROOT_DIR('staticfiles'))
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

@@ -1,12 +1,10 @@
 version: '3.7'
 
 services:
-  web:
+  backend:
     command: python manage.py runserver 0.0.0.0:8000 --nostatic
-    volumes:
-      - ./web:/code
     ports:
       - 8000:8000
-    env_file: ./envs/web.dev.env
-  db:
-    env_file: ./envs/db.dev.env
+    env_file: ./envs/dev.env
+  postgres:
+    env_file: ./envs/dev.env

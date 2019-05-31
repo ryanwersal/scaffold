@@ -14,19 +14,19 @@ Just a basic project scaffold for Python/Django/Docker/AWS/etc.
 
 ## Configuring your editor to point to the virtualenv Python
 
-In the ./web directory run `pipenv --venv` to get the path to the virtualenv Python,
+In the ./backend directory run `pipenv --venv` to get the path to the virtualenv Python,
 then configure your editor to point to that path as its Python.
 In Visual Studio Code this can be done in .vscode/settings.json
 by setting the python.pythonPath variable.
 
 ## Adding new Python dependencies
 
-From the ./web directory do
+From the ./backend directory do
 `pipenv install foo` and then from the root directory do `make dev-up`
 
 ## Starting a development environment
 
-Run `make dev-up` to start a development environment. You should see all kinds of logs in the shell and it should end with the Django development server running. It will automatically refresh when changes to the filesystem are made, as it mounts the ./web directory as its volume.
+Run `make dev-up` to start a development environment. You should see all kinds of logs in the shell and it should end with the Django development server running. It will automatically refresh when changes to the filesystem are made, as it mounts the ./backend directory as its volume.
 
 Check <http://localhost:8000/admin> to ensure things are working, including serving static files.
 

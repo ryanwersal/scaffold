@@ -10,6 +10,7 @@ django = "*"
 psycopg2-binary = "*"
 whitenoise = {extras = ["brotli"],version = "*"}
 gunicorn = "*"
+django-environ = "*"
 
 [requires]
 python_version = "3.7"
