@@ -35,3 +35,12 @@ Check <http://localhost:8000/admin> to ensure things are working, including serv
 Run `make prod-up` to start a production environment. It will run a system that is much more similar to production, complete with Nginx reverse proxying to a Gunicorn application server.
 
 Check <http://localhost:8000/admin> to ensure things are working, including serving static files.
+
+## Creating a new backend app
+
+To start a new app called foo:
+
+* cd to ./backend
+* mkdir ./apps/foo
+* pipenv shell
+* python manage.py startapp foo ./apps/foo
