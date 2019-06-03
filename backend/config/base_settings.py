@@ -16,8 +16,8 @@ import environ
 # Load environment variables.
 env = environ.Env()
 
-# The ROOT_DIR should be /backend
-ROOT_DIR = environ.Path(__file__) - 2
+# The BASE_DIR should be /backend
+BASE_DIR = environ.Path(__file__) - 2
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -26,9 +26,8 @@ ROOT_DIR = environ.Path(__file__) - 2
 SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
 
-# Application definition
-
-INSTALLED_APPS = [
+# Django plug in apps go here.
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,6 +35,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+# Third party plugin apps go here.
+THIRD_PARTY_APPS = []
+
+# User-created apps go here.
+LOCAL_APPS = []
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,6 +127,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = str(ROOT_DIR('staticfiles'))
+STATIC_ROOT = str(BASE_DIR('staticfiles'))
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
