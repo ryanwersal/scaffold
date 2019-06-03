@@ -3,8 +3,16 @@ version: '3.7'
 services:
   backend:
     command: python manage.py runserver 0.0.0.0:8000 --nostatic
-    ports:
-      - 8000:8000
     env_file: ./envs/dev.env
+  frontend:
+    image: node:10-alpine
+    command: npm run serve
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
   postgres:
+    env_file: ./envs/dev.env
+  nginx:
+    build:
+      dockerfile: ./nginx/Dockerfile.dev
     env_file: ./envs/dev.env

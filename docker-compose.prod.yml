@@ -4,13 +4,9 @@ services:
   backend:
     command: gunicorn config.wsgi
     env_file: ./envs/prod.env
-    expose:
-      - 8000
   postgres:
     env_file: ./envs/prod.env
   nginx:
-    build: ./nginx
-    ports:
-      - 8000:80
-    depends_on:
-      - backend
+    build:
+      dockerfile: ./nginx/Dockerfile.prod
+    env_file: ./envs/prod.env
