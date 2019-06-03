@@ -1,6 +1,6 @@
 # scaffold
 
-Just a basic project scaffold for Python/Django/Docker/AWS/etc.
+Just a basic project scaffold for Python/Django/Docker/Vue/AWS/etc. The production configuration has NGinx serving Vue.js on the frontend and reverse-proxying to a Django application running a REST API on the backend. The project is containerized using Docker and orchestrated with Docker Compose.
 
 ## Setup
 
@@ -9,8 +9,7 @@ Just a basic project scaffold for Python/Django/Docker/AWS/etc.
 * Check out source from Github and cd into the project directory.
 * Get .env files out of secure storage and add to ./envs.
 * Run `pipenv update` to pull down all Python dependencies.
-* Run `make dev-up` to start a development environment.
-* Check <http://localhost:8000> to ensure things are working.
+* Follow the rest of the instructions for Starting a development environment.
 
 ## Configuring your editor to point to the virtualenv Python
 
@@ -21,26 +20,39 @@ by setting the python.pythonPath variable.
 
 ## Adding new Python dependencies
 
-From the ./backend directory do
-`pipenv install foo` and then from the root directory do `make dev-up`
+```shell
+> cd ./backend
+> pipenv install foo
+> cd ..
+> make dev-up
+```
 
 ## Starting a development environment
 
-Run `make dev-up` to start a development environment. You should see all kinds of logs in the shell and it should end with the Django development server running. It will automatically refresh when changes to the filesystem are made, as it mounts the ./backend directory as its volume.
+```shell
+> make dev-up
+```
 
-Check <http://localhost:8000/admin> to ensure things are working, including serving static files.
+This will build and start a development environment. You should see all kinds of logs in the shell from the various Docker containers. Both the frontend and backend should automatically pick up changes to the filesystems as you do your development.
+
+Check <http://localhost:8000/admin> to ensure things are working.
 
 ## Starting a production environment
 
-Run `make prod-up` to start a production environment. It will run a system that is much more similar to production, complete with Nginx reverse proxying to a Gunicorn application server.
+```shell
+> make prod-up
+```
+This will build and start a system that is similar to production, complete with Nginx reverse proxying to a Gunicorn application server on the backend and serving Vue itself on the frontend.
 
-Check <http://localhost:8000/admin> to ensure things are working, including serving static files.
+Check <http://localhost:8000/> to ensure things are working.
 
 ## Creating a new backend app
 
 To start a new app called foo:
 
-* cd to ./backend
-* mkdir ./apps/foo
-* pipenv shell
-* python manage.py startapp foo ./apps/foo
+```shell
+> cd ./backend
+> mkdir ./apps/foo
+> pipenv shell
+> python manage.py startup foo ./apps/foo
+```
