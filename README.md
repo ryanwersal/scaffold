@@ -42,17 +42,7 @@ Check <http://localhost:8000/admin> to ensure things are working.
 ```shell
 > make prod-up
 ```
+
 This will build and start a system that is similar to production, complete with Nginx reverse proxying to a Gunicorn application server on the backend and serving Vue itself on the frontend.
 
 Check <http://localhost:8000/> to ensure things are working.
-
-## Creating a new backend app
-
-To start a new app called foo:
-
-```shell
-> cd ./backend
-> mkdir ./apps/foo
-> pipenv shell
-> python manage.py startup foo ./apps/foo
-```
