@@ -20,7 +20,7 @@ migrate-db:
 	docker exec --interactive scaffold_backend_1 python manage.py migrate
 
 new-backend-app:
-	docker exec --interactive scaffold_backend_1 python manage.py startapp $(name)
+	mkdir ./backend/apps/$(name) && docker exec --interactive scaffold_backend_1 python manage.py startapp $(name) ./apps/$(name)
 
 superuser:
 	docker exec --interactive --tty scaffold_backend_1 python manage.py createsuperuser

@@ -22,9 +22,21 @@ BASE_DIR = environ.Path(__file__) - 2
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
+DEBUG = env.bool('DJANGO_DEBUG')
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
+DOMAIN = env.str('DJANGO_DOMAIN')
+
+# Production-specific settings
+if not DEBUG:
+    ALLOWED_HOSTS = ["*"]
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Django plug in apps go here.
 DJANGO_APPS = [
@@ -43,7 +55,7 @@ THIRD_PARTY_APPS = [
 
 # User-created apps go here.
 LOCAL_APPS = [
-    'api',
+    'apps.users',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -134,3 +146,27 @@ USE_TZ = True
 STATIC_ROOT = str(BASE_DIR('staticfiles'))
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# AUTHENTICATION CONFIGURATION
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+AUTH_USER_MODEL = 'users.User'
+
+# DJANGO REST FRAMEWORK
+REST_FRAMEWORK = {
+    'UPLOADED_FILES_USE_URL': False,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.FileUploadParser'
+    ]
+}
