@@ -70,3 +70,11 @@ To run migrations on the database in the development environment:
 ```shell
 > make migrate-db
 ```
+
+## Creating a superuser
+
+To create a superuser in the development environment:
+
+```shell
+> make superuser
+```
