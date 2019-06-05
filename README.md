@@ -42,17 +42,31 @@ Check <http://localhost:8000/admin> to ensure things are working.
 ```shell
 > make prod-up
 ```
+
 This will build and start a system that is similar to production, complete with Nginx reverse proxying to a Gunicorn application server on the backend and serving Vue itself on the frontend.
 
 Check <http://localhost:8000/> to ensure things are working.
 
 ## Creating a new backend app
 
-To start a new app called foo:
+With the dev environment running, start a new app called foo:
 
 ```shell
-> cd ./backend
-> mkdir ./apps/foo
-> pipenv shell
-> python manage.py startup foo ./apps/foo
+> make new-backend-app name=foo
+```
+
+## Creating database migration files
+
+With the dev environment running, create database migration files:
+
+```shell
+> make migrations
+```
+
+## Migrating the database
+
+To run migrations on the database in the development environment:
+
+```shell
+> make migrate-db
 ```
