@@ -11,6 +11,7 @@ psycopg2-binary = "*"
 whitenoise = {extras = ["brotli"],version = "*"}
 gunicorn = "*"
 django-environ = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.7"
