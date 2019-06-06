@@ -14,4 +14,6 @@ RUN_DB_MIGRATIONS=probably true in Development and false in Production, but chan
 
 The following setting only needs to be present in the production environment:
 
+DJANGO_EMAIL_HOST=smtp server hostname
+DJANGO_EMAIL_PORT=smtp server port
 GUNICORN_CMD_ARGS=--bind 0.0.0.0:8000 --log-file=- --worker-tmp-dir /dev/shm --workers=2 --threads=4 --worker-class=gthread
