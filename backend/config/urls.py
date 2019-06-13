@@ -16,11 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import logout
 from django.urls import path, include
+from allauth.account.views import confirm_email, password_reset
 from .api import api
 
 urlpatterns = [
     path('admin/', admin.site.urls, name = 'admin'),
     path('api/', include(api.urls), name = 'api'),
-    path('rest-auth/', include('rest_auth.urls'), name = 'auth'),
-    path('rest-auth/registration/', include('rest_auth.registration.urls'), name = 'registration'),
+    path('auth/', include('rest_auth.urls'), name = 'auth'),
+    path('registration/', include('rest_auth.registration.urls'), name = 'registration'),
+
+    # Necessary to make allauth send confirmation and reset emails correctly. Not externally routable.
+    path('accounts/', include('allauth.urls')),
+
+    # HACK: Makes allauth generate the confirmation and reset links correctly.
+    path('register/<key>', confirm_email, name = "account_confirm_email"),
+    path('password_reset/<uidb64>/<token>', password_reset, name = "password_reset_confirm"),
 ]

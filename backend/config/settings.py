@@ -57,6 +57,7 @@ THIRD_PARTY_APPS = [
     'rest_auth.registration',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
 ]
 
 # User-created apps go here.
@@ -164,6 +165,7 @@ else:
 # AUTHENTICATION CONFIGURATION
 SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
