@@ -32,8 +32,11 @@ DOMAIN = env.str('DJANGO_DOMAIN')
 # Production-specific settings
 if not DEBUG:
     ALLOWED_HOSTS = ["*"]
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+
+    # FIXME: Re-enable these when SSL is working.
+    #SESSION_COOKIE_SECURE = True
+    #CSRF_COOKIE_SECURE = True
+
     X_FRAME_OPTIONS = 'DENY'
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -154,12 +157,11 @@ STATIC_ROOT = str(BASE_DIR('staticfiles'))
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+
 # EMAIL CONFIGURATION
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
-    EMAIL_HOST = env.str('DJANGO_EMAIL_HOST')
-    EMAIL_PORT = env.int('DJANGO_EMAIL_PORT')
+EMAIL_BACKEND = env.str('DJANGO_EMAIL_BACKEND', default = 'django.core.mail.backends.console.EmailBackend')
+EMAIL_HOST = env.str('DJANGO_EMAIL_HOST', default = 'localhost')
+EMAIL_PORT = env.int('DJANGO_EMAIL_PORT', default = 25)
 
 
 # AUTHENTICATION CONFIGURATION
