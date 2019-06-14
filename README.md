@@ -4,10 +4,10 @@ Just a basic project scaffold for Python/Django/Docker/Vue/AWS/etc. The producti
 
 ## Setup
 
-* Install Docker
-* Install pipenv
+* Install Docker.
+* Install pipenv.
 * Check out source from Github and cd into the project directory.
-* Get .env files out of secure storage and add to ./envs.
+* Get .env files out of secure storage and add to ./envs. See the section below on Environment Variables.
 * Run `pipenv update` to pull down all Python dependencies.
 * Follow the rest of the instructions for Starting a development environment.
 
@@ -35,9 +35,11 @@ by setting the python.pythonPath variable.
 
 This will build and start a development environment. You should see all kinds of logs in the shell from the various Docker containers. Both the frontend and backend should automatically pick up changes to the filesystems as you do your development.
 
-Check <http://localhost:8000/admin> to ensure things are working.
+Check <http://localhost:8000/> to ensure things are working.
 
 ## Starting a production environment
+
+First, ensure that you have the necessary files in place such that HTTPS works correctly, as that is a requirement in the production configuration. See the section below on SSL.
 
 ```shell
 > make prod-up
@@ -78,3 +80,33 @@ To create a superuser in the development environment:
 ```shell
 > make superuser
 ```
+
+## Environment variables
+
+All the environment variables are stored in files in the .envs directory. You should store the settings in some sort of secret vault, be it Lastpass or something like AWS Secrets Manager, and generate the files with the appropriate data. There should be dev.env and prod.env files in this directory with the following variables:
+
+DOMAIN=YOUR_DOMAIN_NAME
+DJANGO_DEBUG=true in Development, false in Production
+DJANGO_SECRET_KEY=YOUR_SECRET_KEY
+POSTGRES_DB=YOUR_DB_NAME
+POSTGRES_USER=YOUR_DB_USER
+POSTGRES_PASSWORD=YOUR_DB_PASSWORD
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+RUN_DB_MIGRATIONS=probably true in Development and false in Production, but change as appropriate
+
+The following setting only needs to be present in the production environment:
+GUNICORN_CMD_ARGS=--bind 0.0.0.0:8000 --log-file=- --worker-tmp-dir /dev/shm --workers=2 --threads=4 --worker-class=gthread
+
+These are optional settings that have reasonably safe defaults:
+DJANGO_EMAIL_BACKEND= See <https://docs.djangoproject.com/en/2.2/topics/email/#email-backends>
+DJANGO_EMAIL_HOST=smtp server hostname or None if using console-based email backend
+DJANGO_EMAIL_PORT=smtp server port or -1 if using console-based email backend
+
+## SSL
+
+SSL is a hard requirement in the production configuration and all HTTP requests will be redirected to the appropriate HTTPS route. You need to have the following files present in /nginx/ssl:
+
+* app.crt
+* app.key
+* app.pem

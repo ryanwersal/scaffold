@@ -27,16 +27,13 @@ DEBUG = env.bool('DJANGO_DEBUG')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str('DJANGO_SECRET_KEY')
 
-DOMAIN = env.str('DJANGO_DOMAIN')
+DOMAIN = env.str('DOMAIN')
 
 # Production-specific settings
 if not DEBUG:
     ALLOWED_HOSTS = ["*"]
-
-    # FIXME: Re-enable these when SSL is working.
-    #SESSION_COOKIE_SECURE = True
-    #CSRF_COOKIE_SECURE = True
-
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
     X_FRAME_OPTIONS = 'DENY'
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True

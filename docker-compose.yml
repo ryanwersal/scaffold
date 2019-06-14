@@ -16,8 +16,6 @@ services:
   nginx:
       build:
         context: .
-      ports:
-        - 8000:80
       depends_on:
         - backend
 volumes:

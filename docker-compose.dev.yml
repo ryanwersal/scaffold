@@ -17,4 +17,6 @@ services:
   nginx:
     build:
       dockerfile: ./nginx/Dockerfile.dev
+    ports:
+      - 8000:80
     env_file: ./envs/dev.env

@@ -2,6 +2,11 @@
 .vscode/*
 *.code-workspace
 
+# Keys, certs, pems
+*.key
+*.crt
+*.pem
+
 # Environment files
 *.env
 
