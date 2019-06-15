@@ -4,8 +4,12 @@ Just a basic project scaffold for Python/Django/Docker/Vue/AWS/etc. The producti
 
 ## Setup
 
-* Install Docker.
-* Install pipenv.
+* Install these dependencies:
+  * Docker
+  * Python 3.7 (use pyenv if you prefer)
+  * pipenv
+  * nodejs
+  * vue-cli
 * Check out source from Github and cd into the project directory.
 * Get .env files out of secure storage and add to ./envs. See the section below on Environment Variables.
 * Run `pipenv update` to pull down all Python dependencies.
@@ -47,11 +51,11 @@ First, ensure that you have the necessary files in place such that HTTPS works c
 
 This will build and start a system that is similar to production, complete with Nginx reverse proxying to a Gunicorn application server on the backend and serving Vue itself on the frontend.
 
-Check <http://localhost:8000/> to ensure things are working.
+Check <http://localhost/> to ensure things are working. You should be redirected to <https://localhost/> if things are working corretly. If you used a self-signed certificate (hopefully only for your own testing, *not* actual production) then you'll likely get the big scary warning in your broswer about it not being secure.
 
 ## Creating a new backend app
 
-With the dev environment running, start a new app called foo:
+With an environment running, to start a new app called foo:
 
 ```shell
 > make new-backend-app name=foo
@@ -59,7 +63,7 @@ With the dev environment running, start a new app called foo:
 
 ## Creating database migration files
 
-With the dev environment running, create database migration files:
+With an environment running:
 
 ```shell
 > make migrations
@@ -67,7 +71,7 @@ With the dev environment running, create database migration files:
 
 ## Migrating the database
 
-To run migrations on the database in the development environment:
+With an environment running, to actually execute the database migration:
 
 ```shell
 > make migrate-db
@@ -75,7 +79,7 @@ To run migrations on the database in the development environment:
 
 ## Creating a superuser
 
-To create a superuser in the development environment:
+With an environment running:
 
 ```shell
 > make superuser
@@ -107,7 +111,7 @@ These are optional settings that have reasonably safe defaults:
 
 ## SSL
 
-SSL is a hard requirement in the production configuration and all HTTP requests will be redirected to the appropriate HTTPS route. You need to have the following files present in /nginx/ssl:
+SSL is a hard requirement in the production configuration and all HTTP requests will be redirected to the appropriate HTTPS route. Feel free to use a self-signed cert for development and testing, but *do not* use it for production. Just get one from [Let's Encrypt](<https://letsencrypt.org>) or whatever. You need to have the following files present in /nginx/ssl:
 
 * app.crt
 * app.key
