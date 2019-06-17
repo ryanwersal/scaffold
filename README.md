@@ -1,6 +1,6 @@
 # scaffold
 
-Just a basic project scaffold for Python/Django/Docker/Vue/AWS/etc. The production configuration has NGinx serving Vue.js on the frontend and reverse-proxying to a Django application running a REST API on the backend. The project is containerized using Docker and orchestrated with Docker Compose.
+Just a basic project scaffold for Django/Vue/Postgres/Docker/AWS/etc. The production configuration has NGinx serving Vue.js on the frontend and reverse-proxying to a Django application running a REST API on the backend. The project is containerized using Docker and orchestrated with Docker Compose.
 
 ## Setup
 
@@ -12,7 +12,8 @@ Just a basic project scaffold for Python/Django/Docker/Vue/AWS/etc. The producti
   * vue-cli
 * Check out source from Github and cd into the project directory.
 * Get .env files out of secure storage and add to ./envs. See the section below on Environment Variables.
-* Run `pipenv update` to pull down all Python dependencies.
+* Change to ./backend and run `pipenv update` to pull down all Python dependencies.
+* Change to ./frontend and run `npm install` to pull down all the JS dependencies.
 * Follow the rest of the instructions for Starting a development environment.
 
 ## Configuring your editor to point to the virtualenv Python
