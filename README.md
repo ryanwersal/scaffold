@@ -42,6 +42,12 @@ This will build and start a development environment. You should see all kinds of
 
 Check <http://localhost:8000/> to ensure things are working.
 
+You can tear down the environment by hitting Ctrl-C, or in another terminal:
+
+```shell
+> make dev-down
+```
+
 ## Starting a production environment
 
 First, ensure that you have the necessary files in place such that HTTPS works correctly, as that is a requirement in the production configuration. See the section below on SSL.
@@ -53,6 +59,12 @@ First, ensure that you have the necessary files in place such that HTTPS works c
 This will build and start a system that is similar to production, complete with Nginx reverse proxying to a Gunicorn application server on the backend and serving Vue itself on the frontend.
 
 Check <http://localhost/> to ensure things are working. You should be redirected to <https://localhost/> if things are working correctly. If you used a self-signed certificate (hopefully only for your own testing, *not* actual production) then you'll likely get the big scary warning in your browser about it not being secure.
+
+You can tear down the environment by:
+
+```shell
+> make prod-down
+```
 
 ## Creating a new backend app
 
