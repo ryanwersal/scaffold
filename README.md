@@ -51,7 +51,7 @@ First, ensure that you have the necessary files in place such that HTTPS works c
 
 This will build and start a system that is similar to production, complete with Nginx reverse proxying to a Gunicorn application server on the backend and serving Vue itself on the frontend.
 
-Check <http://localhost/> to ensure things are working. You should be redirected to <https://localhost/> if things are working corretly. If you used a self-signed certificate (hopefully only for your own testing, *not* actual production) then you'll likely get the big scary warning in your broswer about it not being secure.
+Check <http://localhost/> to ensure things are working. You should be redirected to <https://localhost/> if things are working correctly. If you used a self-signed certificate (hopefully only for your own testing, *not* actual production) then you'll likely get the big scary warning in your browser about it not being secure.
 
 ## Creating a new backend app
 
